@@ -11,4 +11,17 @@
 			w.toolbelt.resizeFunctions[i]();
 		}
 	};
+	w.toolbelt.checkSWFObject = function (cb) {
+		if (typeof swfobject === 'undefined' || swfobject === null) {
+			$.getScript(window.location.protocol + '//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js', function () {
+				if (!!cb) {
+					cb();
+				}
+			});
+		} else {
+			if (!!cb) {
+				cb();
+			}
+		}
+	};
 }(window, jQuery));
