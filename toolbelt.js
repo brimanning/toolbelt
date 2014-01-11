@@ -11,6 +11,7 @@
 			w.toolbelt.resizeFunctions[i]();
 		}
 	};
+
 	w.toolbelt.checkSWFObject = function (cb) {
 		if (typeof swfobject === 'undefined' || swfobject === null) {
 			$.getScript(window.location.protocol + '//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js', function () {
@@ -23,5 +24,9 @@
 				cb();
 			}
 		}
+	};
+
+	w.toolbelt.exists = function(obj) {
+		return typeof obj !== 'undefined' && !!obj;
 	};
 }(window, jQuery));
