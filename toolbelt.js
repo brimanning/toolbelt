@@ -13,9 +13,9 @@
 		}
 	};
 
-	w.toolbelt.checkSWFObject = function (cb) {
+	w.toolbelt.checkSWFObject = function (cb, preferredUrl) {
 		if (typeof swfobject === 'undefined' || swfobject === null) {
-			$.getScript(window.location.protocol + '//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js', function () {
+			$.getScript(w.toolbelt.exists(preferredUrl) ? preferredUrl : window.location.protocol + '//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js', function () {
 				if (!!cb) {
 					cb();
 				}
