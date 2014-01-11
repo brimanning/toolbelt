@@ -35,4 +35,24 @@
 	w.toolbelt.checkBrowser = function(browser) {
 		return navigator.userAgent.toLowerCase().match(new RegExp(type)) != null;
 	};
+
+	w.toolbelt.visible = function(obj) {
+		if (typeof obj === 'string') {
+			obj = $(obj);
+		}
+
+		if (!obj.is(':visible')) {
+			return false;
+		} else if (obj.is(':hidden')) {
+			return true;
+		}
+
+		var $window = $(w),
+			docViewTop = $window.scrollTop(),
+			docViewBottom = docViewTop + $window.height(),
+			elemTop = obj.offset().top,
+			elemBottom = elemTop + obj.height();
+
+		return elemBottom >= docViewTop && elemTop <= docViewBottom;
+	};
 }(window, jQuery));
