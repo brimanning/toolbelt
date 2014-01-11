@@ -33,7 +33,28 @@
 
 	//I know people don't like this, but sometimes you need to know if it's iOS, IE or Android, sorry
 	w.toolbelt.checkBrowser = function(browser) {
-		return navigator.userAgent.toLowerCase().match(new RegExp(type)) != null;
+		return navigator.userAgent.toLowerCase().match(new RegExp(browser)) != null;
+	};
+	w.toolbelt.isMobile = function() {
+		return w.toolbelt.checkBrowser('iphone|ipod|ipad|mobile|android');
+	};
+	w.toolbelt.isIOS = function() {
+		return w.toolbelt.checkBrowser('iphone|ipod|ipad|mobile safari');
+	};
+	w.toolbelt.isIPad = function() {
+		return w.toolbelt.checkBrowser('ipad');
+	};
+	w.toolbelt.isIPod = function() {
+		return w.toolbelt.checkBrowser('ipod');
+	};
+	w.toolbelt.isIPhone = function() {
+		return w.toolbelt.checkBrowser('iphone');
+	};
+	w.toolbelt.isAndroid = function() {
+		return w.toolbelt.checkBrowser('android');
+	};
+	w.toolbelt.isWindowsPhone = function() {
+		return w.toolbelt.checkBrowser('iemobile|Windows Phone');
 	};
 
 	w.toolbelt.visible = function(obj) {
