@@ -31,6 +31,11 @@
 		return typeof obj !== 'undefined' && !!obj;
 	};
 
+	w.toolbelt.rerender = function() {
+		w.scrollTo(0, w.pageYOffset);
+		$(w).trigger('scroll');
+	};
+
 	//I know people don't like this, but sometimes you need to know if it's iOS, IE or Android, sorry
 	w.toolbelt.checkBrowser = function(browser) {
 		return navigator.userAgent.toLowerCase().match(new RegExp(browser)) != null;
