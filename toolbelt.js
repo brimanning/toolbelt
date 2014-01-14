@@ -109,6 +109,13 @@
 				} catch (e) { }
 			}
 			return val;
+		},
+		removeSessionItem = function(key) {
+			if (checkSessionStorage()) {
+				try {
+				sessionStorage.removeItem(key);
+				} catch (e) { }
+			}
 		};
 
 	w.toolbelt.cachedAjax = function(options) {
@@ -120,7 +127,7 @@
 				&& val.expiration < new Date().getTime()) {
 
 				val = null;
-				//TODO: add cache removal
+				removeSessionItem(options.url);
 			}
 		}
 
