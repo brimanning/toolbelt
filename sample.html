@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="toolbelt.js"></script>
+	<script>
+		toolbelt.cachedAjax({
+			url: 'sample-response.json',
+			dataType: 'json',
+			success: function(d) {
+				console.log(d);
+			},
+			error: function(d, s, e) {
+				console.log(d);
+				console.log(s);
+				console.log(e);
+			},
+			expires: 15
+		});
+	</script>
+</body>
+</html>
