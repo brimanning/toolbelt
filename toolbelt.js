@@ -31,7 +31,7 @@
 		return typeof obj !== 'undefined' && !!obj;
 	};
 
-	w.toolbelt.rerender = function() {
+	w.toolbelt.reRender = function() {
 		w.scrollTo(0, w.pageYOffset);
 		$(w).trigger('scroll');
 	};
@@ -62,7 +62,7 @@
 		return w.toolbelt.checkBrowser('iemobile|Windows Phone');
 	};
 
-	w.toolbelt.visible = function(obj) {
+	w.toolbelt.isVisible = function(obj) {
 		if (typeof obj === 'string') {
 			obj = $(obj);
 		}
