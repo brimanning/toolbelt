@@ -82,38 +82,41 @@
 		return elemBottom >= docViewTop && elemTop <= docViewBottom;
 	};
 
-	var useSessionStorage = null,
-		checkSessionStorage = function() {
+	var useStorage = null,
+		checkStorage = function(storageType) {
 			try {
-				if (useSessionStorage === null) {
-					useSessionStorage = w.toolbelt.exists(Storage) && w.toolbelt.exists(sessionStorage);
+				if (useStorage === null) {
+					useStorage = w.toolbelt.exists(Storage) && w.toolbelt.exists(storageType === 'session' ? sessionStorage : localStorage);
 				}
 			} catch(e) {
-				useSessionStorage= false;
+				useStorage = false;
 			}
 
-			return useSessionStorage;
+			return useStorage !== null;
 		},
-		setSessionItem = function(key, obj) {
-			if (checkSessionStorage()) {
+		getStorage = function(storageType) {
+			return storageType === 'session' ? sessionStorage : localStorage;
+		},
+		setItem = function(key, obj, storageType) {
+			if (checkStorage(storageType)) {
 				try {
-					sessionStorage.setItem(key, JSON.stringify(obj));
+					getStorage().setItem(key, JSON.stringify(obj));
 				} catch (e) { }
 			}
 		},
-		getSessionItem = function(key) {
+		getItem = function(key, storageType) {
 			var val = null;
-			if (checkSessionStorage()) {
+			if (checkStorage(storageType)) {
 				try {
-					val = JSON.parse(sessionStorage.getItem(key));
+					val = JSON.parse(getStorage().getItem(key));
 				} catch (e) { }
 			}
 			return val;
 		},
-		removeSessionItem = function(key) {
-			if (checkSessionStorage()) {
+		removeItem = function(key, storageType) {
+			if (checkStorage(storageType)) {
 				try {
-				sessionStorage.removeItem(key);
+					getStorage().removeItem(key);
 				} catch (e) { }
 			}
 		};
@@ -122,12 +125,16 @@
 		var val = null;
 		options = options || {};
 		if (!w.toolbelt.exists(options.cache) || !options.cache) {
-			val = getSessionItem(options.url);
+			if (!w.toolbelt.exists(options.storageType)) {
+				options.storageType = 'session';
+			}
+
+			val = getItem(options.url, options.storageType);
 			if (w.toolbelt.exists(options.expires) && options.expires > 0 && !!val && !!val.expiration
 				&& val.expiration < new Date().getTime()) {
 
 				val = null;
-				removeSessionItem(options.url);
+				removeItem(options.url, options.storageType);
 			}
 		}
 
@@ -137,7 +144,7 @@
 					var now = new Date();
 					val.expiration = now.setSeconds(now.getSeconds() + options.expires);
 				}
-				setSessionItem(options.url, val);
+				setItem(options.url, val, options.storageType);
 				options.success(val);
 			};
 			options.success = success;
