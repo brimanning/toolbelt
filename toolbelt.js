@@ -81,4 +81,62 @@
 
 		return elemBottom >= docViewTop && elemTop <= docViewBottom;
 	};
+
+	var useSessionStorage = null,
+		checkSessionStorage = function() {
+			try {
+				if (useSessionStorage === null) {
+					useSessionStorage = w.toolbelt.exists(Storage) && w.toolbelt.exists(sessionStorage);
+				}
+			} catch(e) {
+				useSessionStorage= false;
+			}
+
+			return useSessionStorage;
+		},
+		setSessionItem = function(key, obj) {
+			if (checkSessionStorage()) {
+				try {
+					sessionStorage.setItem(key, JSON.stringify(obj));
+				} catch (e) { }
+			}
+		},
+		getSessionItem = function(key) {
+			var val = null;
+			if (checkSessionStorage()) {
+				try {
+					val = JSON.parse(sessionStorage.getItem(key));
+				} catch (e) { }
+			}
+			return val;
+		};
+
+	w.toolbelt.cachedAjax = function(options) {
+		var val = null;
+		options = options || {};
+		if (!w.toolbelt.exists(options.cache) || !options.cache) {
+			val = getSessionItem(options.url);
+			if (w.toolbelt.exists(options.expires) && options.expires > 0 && !!val && !!val.expiration
+				&& val.expiration < new Date().getTime()) {
+
+				val = null;
+				//TODO: add cache removal
+			}
+		}
+
+		if (val === null) {
+			var success = function(val) {
+				if (w.toolbelt.exists(options.expires) && options.expires > 0) {
+					var now = new Date();
+					val.expiration = now.setSeconds(now.getSeconds() + options.expires);
+				}
+				setSessionItem(options.url, val);
+				options.success(val);
+			};
+			options.success = success;
+			$.ajax(options);
+		} else if (w.toolbelt.exists(options.success)) {
+			options.success(val);
+		}
+	};
 }(window, jQuery));
