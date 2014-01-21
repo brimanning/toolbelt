@@ -1,3 +1,16 @@
+/*!
+ * Toolbelt JavaScript Library v0.1
+ * https://github.com/brimanning/Toolbelt
+ *
+ * Uses jQuery.js
+ * http://jquery.com/
+ *
+ * Copyright 2014 Brian Manning
+ * Released under the MIT license
+ *
+ * Date: 1/21/2014
+ */
+
 (function (w, $) {
 	w.toolbelt = {};
 
