@@ -16,7 +16,7 @@
 
 	w.toolbelt.resizeFunctions = [];
 	w.toolbelt.addEventOnWindowResize = function (f) {
-		$(window).unbind('resize').bind('resize', w.toolbelt.runWindowResizeEvents);
+		$(window).unbind('resize orientationchange').bind('resize orientationchange', w.toolbelt.runWindowResizeEvents);
 		w.toolbelt.resizeFunctions.push(f);
 		f();
 	};
