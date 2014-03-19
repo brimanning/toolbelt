@@ -16,7 +16,8 @@
 
 	w.toolbelt.resizeFunctions = [];
 	w.toolbelt.addEventOnWindowResize = function (f) {
-		$(window).unbind('resize orientationchange').bind('resize orientationchange', w.toolbelt.runWindowResizeEvents);
+		var eventsToBindTo = 'resize fullscreenchange webkitfullscreenchange mozfullscreenchange orientationchange';
+		$(window).unbind(eventsToBindTo).bind(eventsToBindTo, w.toolbelt.runWindowResizeEvents);
 		w.toolbelt.resizeFunctions.push(f);
 		f();
 	};
