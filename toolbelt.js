@@ -1,5 +1,5 @@
 /*!
- * Toolbelt JavaScript Library v0.1
+ * Toolbelt JavaScript Library v0.0.1
  * https://github.com/brimanning/Toolbelt
  *
  * Uses jQuery.js
