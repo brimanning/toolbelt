@@ -62,3 +62,5 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+node_modules
+bower_components
