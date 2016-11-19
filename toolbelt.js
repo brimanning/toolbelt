@@ -50,7 +50,7 @@
     $(w).trigger('scroll');
   };
 
-  //I know people don't like this, but sometimes you need to know if it's iOS, IE or Android, sorry
+  //Sometimes you just gotta know if it's iOS, IE, Android, we live in a sad, imperfect world
   w.toolbelt.checkBrowser = function(browser) {
     return navigator.userAgent.toLowerCase().match(new RegExp(browser)) != null;
   };
