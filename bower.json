@@ -1,7 +1,7 @@
 {
   "name": "toolbelt",
   "main": "toolbelt.js",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "homepage": "https://github.com/brimanning/toolbelt",
   "authors": [
     "Brian Manning <brimanning@gmail.com>"
@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "snap-storage": "^0.1.0"
   }
 }

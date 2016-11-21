@@ -11,7 +11,7 @@
  * Date: 1/21/2014
  */
 
-(function (w, $) {
+(function (w, $, s) {
   w.toolbelt = {};
 
   w.toolbelt.resizeFunctions = [];
@@ -96,59 +96,20 @@
     return elemBottom >= docViewTop && elemTop <= docViewBottom;
   };
 
-  var useStorage = null,
-    checkStorage = function(storageType) {
-      try {
-        if (useStorage === null) {
-          useStorage = w.toolbelt.exists(Storage) && w.toolbelt.exists(storageType === 'session' ? sessionStorage : localStorage);
-        }
-      } catch(e) {
-        useStorage = false;
-      }
-
-      return useStorage !== null;
-    },
-    getStorage = function(storageType) {
-      return storageType === 'session' ? sessionStorage : localStorage;
-    },
-    setItem = function(key, obj, storageType) {
-      if (checkStorage(storageType)) {
-        try {
-          getStorage().setItem(key, JSON.stringify(obj));
-        } catch (e) { }
-      }
-    },
-    getItem = function(key, storageType) {
-      var val = null;
-      if (checkStorage(storageType)) {
-        try {
-          val = JSON.parse(getStorage().getItem(key));
-        } catch (e) { }
-      }
-      return val;
-    },
-    removeItem = function(key, storageType) {
-      if (checkStorage(storageType)) {
-        try {
-          getStorage().removeItem(key);
-        } catch (e) { }
-      }
-    };
-
   w.toolbelt.cachedAjax = function(options) {
     var val = null;
     options = options || {};
     if (!w.toolbelt.exists(options.cache) || !options.cache) {
       if (!w.toolbelt.exists(options.storageType)) {
-        options.storageType = 'session';
+        s.setType(options.storageType);
       }
 
-      val = getItem(options.url, options.storageType);
+      val = s.get(options.url);
       if (w.toolbelt.exists(options.expires) && options.expires > 0 && !!val && !!val.expiration
         && val.expiration < new Date().getTime()) {
 
         val = null;
-        removeItem(options.url, options.storageType);
+        s.remove(options.url);
       }
     }
 
@@ -158,7 +119,7 @@
           var now = new Date();
           val.expiration = now.setSeconds(now.getSeconds() + options.expires);
         }
-        setItem(options.url, val, options.storageType);
+        s.set(options.url, val);
         options.success(val);
       };
       options.success = success;
@@ -167,4 +128,4 @@
       options.success(val);
     }
   };
-}(window, jQuery));
+}(window, jQuery, snap));
