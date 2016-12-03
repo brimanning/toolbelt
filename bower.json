@@ -4,7 +4,7 @@
   "version": "0.1.1",
   "homepage": "https://github.com/brimanning/toolbelt",
   "authors": [
-    "Brian Manning <brimanning@gmail.com>"
+    "Brian Manning <bri@brimanning.com>"
   ],
   "description": "Some useful JavaScript helpers. It's less of a library and more of a toolbetlt, and thus the name.",
   "license": "MIT",
