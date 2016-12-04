@@ -123,4 +123,12 @@
       options.success(val);
     }
   };
+
+  w.toolbelt.ajax = function(options) {
+    if (options.cached) {
+      w.toolbelt.cachedAjax(options);
+    } else {
+      $.ajax(options);
+    }
+  };
 }(window, jQuery, snap));
