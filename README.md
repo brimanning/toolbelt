@@ -38,3 +38,27 @@ You'll now be able to access the following methods:
 + `isVisible(obj)` - Check to see if a jQuery selection is either `:hidden` and if not, check to see if it's on the screen.
 + `cachedAjax(options)` - A jQuery `ajax` call that caches the returned value in localStorage or sessionStorage via [snap-storage](https://github.com/brimanning/snap-storage). Options in addition to the standard jQuery options are `expires` and `storageType`. `expires` is how long the cache lasts in seconds. The default is that it doesn't expire. `storageType` dictates whether the cache will be saved as localStorage or sessionStorage.
 + `ajax(options)` - Either a passthrough to jQuery `ajax` or calls `cachedAjax` if the `cache` option is used.
+
+Examples
+===
+
+	toolbelt.isVisible('body div'); //returns true on [example page](https://github.com/brimanning/toolbelt/blob/master/example/example.html)
+	toolbelt.isVisible($('body div')); //same as above
+	toolbelt.isVisible('body div div'); //returns false on example page](https://github.com/brimanning/toolbelt/blob/master/example/example.html)
+	toolbelt.isVisible($('body div div')); //same as above
+
+	toolbelt.cachedAjax({
+		url: 'https://jsonplaceholder.typicode.com/posts/1',
+		dataType: 'json',
+		storageType: 'local',
+		expires: 5,
+		success: function(d) {
+			console.log(d);
+		},
+		error: function(d, s, e) {
+			console.log(d);
+			console.log(s);
+			console.log(e);
+		},
+		expires: 15
+	});
