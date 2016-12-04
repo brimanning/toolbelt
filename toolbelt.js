@@ -97,18 +97,16 @@
   w.toolbelt.cachedAjax = function(options) {
     var val = null;
     options = options || {};
-    if (!w.toolbelt.exists(options.cache) || !options.cache) {
-      if (!w.toolbelt.exists(options.storageType)) {
-        s.setType(options.storageType);
-      }
+    if (!w.toolbelt.exists(options.storageType)) {
+      s.setType(options.storageType);
+    }
 
-      val = s.get(options.url);
-      if (w.toolbelt.exists(options.expires) && options.expires > 0 && !!val && !!val.expiration
-        && val.expiration < new Date().getTime()) {
+    val = s.get(options.url);
+    if (w.toolbelt.exists(options.expires) && options.expires > 0 && !!val && !!val.expiration
+      && val.expiration < new Date().getTime()) {
 
-        val = null;
-        s.remove(options.url);
-      }
+      val = null;
+      s.remove(options.url);
     }
 
     if (val === null) {
