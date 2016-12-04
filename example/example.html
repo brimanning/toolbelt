@@ -17,6 +17,9 @@
   <script src="../bower_components/snap-storage/snap-storage.js"></script>
   <script src="../toolbelt.js"></script>
   <script>
+    toolbelt.isVisible('body div'); //returns true
+    toolbelt.isVisible('body div div'); //returns false
+
     toolbelt.cachedAjax({
       url: 'https://jsonplaceholder.typicode.com/posts/1',
       dataType: 'json',
