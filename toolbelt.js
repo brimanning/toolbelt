@@ -110,13 +110,14 @@
     }
 
     if (val === null) {
-      var success = function(val) {
+      var successPromise = options.success,
+        success = function(val) {
         if (w.toolbelt.exists(options.expires) && options.expires > 0) {
           var now = new Date();
           val.expiration = now.setSeconds(now.getSeconds() + options.expires);
         }
         s.set(options.url, val);
-        options.success(val);
+        successPromise(val);
       };
       options.success = success;
       $.ajax(options);
