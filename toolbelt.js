@@ -81,10 +81,8 @@
       obj = $(obj);
     }
 
-    if (!obj.is(':visible')) {
+    if (obj.is(':hidden')) {
       return false;
-    } else if (obj.is(':hidden')) {
-      return true;
     }
 
     var $window = $(w),
