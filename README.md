@@ -36,4 +36,5 @@ You'll now be able to access the following methods:
 + `isAndroid()` - Use `checkBrowser` with `'android'`.
 + `isWindowsPhone()` - Use `checkBrowser` with `'iemobile|Windows Phone'`.
 + `isVisible(obj)` - Check to see if a jQuery selection is either `:hidden` and if not, check to see if it's on the screen.
-+ `cachedAjax(options)` - A jQuery `ajax()` call that caches the returned value in localStorage or sessionStorage via [snap-storage](https://github.com/brimanning/snap-storage). Options in addition to the standard jQuery options are `expires` and `storageType`. `expires` is how long the cache lasts in seconds. The default is that it doesn't expire. `storageType` dictates whether the cache will be saved as localStorage or sessionStorage.
++ `cachedAjax(options)` - A jQuery `ajax` call that caches the returned value in localStorage or sessionStorage via [snap-storage](https://github.com/brimanning/snap-storage). Options in addition to the standard jQuery options are `expires` and `storageType`. `expires` is how long the cache lasts in seconds. The default is that it doesn't expire. `storageType` dictates whether the cache will be saved as localStorage or sessionStorage.
++ `ajax(options)` - Either a passthrough to jQuery `ajax` or calls `cachedAjax` if the `cache` option is used.
