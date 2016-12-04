@@ -102,9 +102,7 @@
     }
 
     val = s.get(options.url);
-    if (w.toolbelt.exists(options.expires) && options.expires > 0 && !!val && !!val.expiration
-      && val.expiration < new Date().getTime()) {
-
+    if (!!val && !!val.expiration && val.expiration < new Date().getTime()) {
       val = null;
       s.remove(options.url);
     }
