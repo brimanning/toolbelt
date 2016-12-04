@@ -55,7 +55,7 @@
     return navigator.userAgent.toLowerCase().match(new RegExp(browser)) != null;
   };
   w.toolbelt.isMobile = function() {
-    return w.toolbelt.checkBrowser('iphone|ipod|ipad|mobile|android');
+    return w.toolbelt.checkBrowser('iphone|ipod|ipad|mobile safari|mobile|android|iemobile|Windows Phone');
   };
   w.toolbelt.isIOS = function() {
     return w.toolbelt.checkBrowser('iphone|ipod|ipad|mobile safari');
